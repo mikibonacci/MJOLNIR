@@ -11,7 +11,7 @@ from  matplotlib.backend_tools import Cursors as cursors
 import MJOLNIR
 import os
 import PyQt5.QtCore
-from PyQt5.QtGui import QCursor, QPixmap
+#from PyQt5.QtGui import QCursor, QPixmap
 
 import sys
 from collections import defaultdict
