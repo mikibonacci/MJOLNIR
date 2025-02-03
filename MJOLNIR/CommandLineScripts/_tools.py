@@ -5,9 +5,9 @@ import re
 import MJOLNIR._tools
 from MJOLNIR.Data import DataFile
 import numpy as np
-from PyQt5.QtWidgets import QApplication, QWidget, QFileDialog
-from PyQt5.Qt import QApplication
-from PyQt5 import Qt
+#from PyQt5.QtWidgets import QApplication, QWidget, QFileDialog
+#from PyQt5.Qt import QApplication
+#from PyQt5 import Qt
 
 from os.path import expanduser
 settingsFile = expanduser("~") # Use home folder for storing settings file
