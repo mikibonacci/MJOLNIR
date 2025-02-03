@@ -5,11 +5,17 @@ import re
 import MJOLNIR._tools
 from MJOLNIR.Data import DataFile
 import numpy as np
-from PyQt5.QtWidgets import QApplication, QWidget, QFileDialog
-from PyQt5.Qt import QApplication
-from PyQt5 import Qt
 
+try:
+    from PyQt5.QtWidgets import QApplication, QWidget, QFileDialog
+    from PyQt5.Qt import QApplication
+    from PyQt5 import Qt
+    HAS_PYQT5 = True
+except ImportError:
+    HAS_PYQT5 = False
+    
 from os.path import expanduser
+
 settingsFile = expanduser("~") # Use home folder for storing settings file
 
 settingsFile = os.path.join(settingsFile,'.MJOLNIRsettings')
@@ -90,33 +96,34 @@ def extractDataFiles(args,settingsName,oneFile = False):# pragma: no cover
             files = args.DataFile
     return files
 
-class App(QWidget):
-    def __init__(self,startingPath=None):
-        super().__init__()
-        self.title = 'MJOLNIR Command Line - Load Files'
-        self.startingPath = startingPath
-        self.initUI()
-    
-    def initUI(self):
-        self.hide()
-        self.setWindowTitle(self.title)
-        self.openFileNamesDialog()
+if HAS_PYQT5:
+    class App(QWidget):
+        def __init__(self,startingPath=None):
+            super().__init__()
+            self.title = 'MJOLNIR Command Line - Load Files'
+            self.startingPath = startingPath
+            self.initUI()
         
+        def initUI(self):
+            self.hide()
+            self.setWindowTitle(self.title)
+            self.openFileNamesDialog()
+            
+            
+            Qt.QCoreApplication.quit()
         
-        Qt.QCoreApplication.quit()
-    
-    def openFileNamesDialog(self):
-        #options = QFileDialog.Options()
-        #options |= QFileDialog.DontUseNativeDialog
-        #print(self,"MJOLNIR Command Line - Load Files", allowedString,self.startingPath)
-        files, _ = QFileDialog.getOpenFileNames(self,"MJOLNIR Command Line - Load Files", self.startingPath,allowedString)
-        global dataFilesLoaded 
-        dataFilesLoaded = files
-        self.close()
-    
+        def openFileNamesDialog(self):
+            #options = QFileDialog.Options()
+            #options |= QFileDialog.DontUseNativeDialog
+            #print(self,"MJOLNIR Command Line - Load Files", allowedString,self.startingPath)
+            files, _ = QFileDialog.getOpenFileNames(self,"MJOLNIR Command Line - Load Files", self.startingPath,allowedString)
+            global dataFilesLoaded 
+            dataFilesLoaded = files
+            self.close()
+        
 
-    
-def loadFiles(startingPath=None):
-    app = QApplication(sys.argv)
-    ex = App(startingPath=startingPath)
-    return dataFilesLoaded
+        
+    def loadFiles(startingPath=None):
+        app = QApplication(sys.argv)
+        ex = App(startingPath=startingPath)
+        return dataFilesLoaded
