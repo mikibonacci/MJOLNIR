@@ -493,7 +493,10 @@ class Viewer3D(object):
     
     def setProjection(self,value):
         """Change projection between Qx,Qy, and E, or along principal, orthogonal Q direction, or E if plotting in RLU."""
-        self.figure.canvas.key_press_event(str(value))
+        #self.figure.canvas.key_press_event(str(value))
+        from matplotlib.backend_bases import KeyEvent
+        event = KeyEvent(name="key_press_event", canvas=self.figure.canvas, key=str(value))
+        self.figure.canvas.callbacks.process("key_press_event", event)
 
     def setPlane(self,value):
         """Change plotting plane to new along same axis"""
