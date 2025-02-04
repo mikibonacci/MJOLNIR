@@ -3417,7 +3417,7 @@ class DataSet(object):
                cut1DFunctionRectangle=None, cut1DFunctionCircle=None, cut1DFunctionRectanglePerp=None,
                cut1DFunctionRectangleHorizontal=None,cut1DFunctionRectangleVertical=None,
                cut2DFunctionRectangle=None, cut2DFunctionCircle=None, cut2DFunctionRectanglePerp=None,
-               cut2DFunctionRectangleHorizontal=None,cut2DFunctionRectangleVertical=None,**kwargs):
+               cut2DFunctionRectangleHorizontal=None,cut2DFunctionRectangleVertical=None, size_inches=(11,7),**kwargs):
         """View data in the Viewer3D object. 
 
         Args:
@@ -3457,6 +3457,8 @@ class DataSet(object):
             - cut1DFunctionRectangle (function): Function to be called when generating interactive rectangle cut (default None)
 
             - cut1DFunctionCircle (function): Function to be called when generating interactive circle cut (default None)
+            
+            - size_inches (tuple): Size of the figure in inches (default (11,7)) for plotting
 
             - kwargs: The remaining kwargs are given to the createQAxis method, intended for tick mark positioning (see createQAxis)
 
@@ -3676,7 +3678,10 @@ class DataSet(object):
             cut2DFunctionRectangleHorizontal=cut2DFunctionRectangleHorizontal,
             cut2DFunctionRectangleVertical=cut2DFunctionRectangleVertical,
 
-            backgroundSubtraction=backgroundSubtraction)
+            backgroundSubtraction=backgroundSubtraction,
+            
+            size_inches=size_inches,
+            )
 
 
             def to_csv(fileName,self):

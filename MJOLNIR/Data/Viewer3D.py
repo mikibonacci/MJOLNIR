@@ -26,7 +26,7 @@ class Viewer3D(object):
                  cmap=None, CurratAxeBraggList=None, plotCurratAxe=False,Ei=None,EfLimits=None, dataset = None, cut1DFunctionRectangle=None,\
                     cut1DFunctionCircle = None, cut1DFunctionRectanglePerp=None,cut1DFunctionRectangleHorizontal=None,cut1DFunctionRectangleVertical=None,
                     cut2DFunctionRectangle=None, cut2DFunctionRectanglePerp=None,cut2DFunctionRectangleHorizontal=None,cut2DFunctionRectangleVertical=None,
-                    backgroundSubtraction=False, **kwargs):#pragma: no cover
+                    backgroundSubtraction=False, size_inches=(11,7), **kwargs):#pragma: no cover
         """3 dimensional viewing object generating interactive Matplotlib figure. 
         Keeps track of all the different plotting functions and variables in order to allow the user to change between different slicing modes and to scroll through the data in an interactive way.
 
@@ -64,6 +64,8 @@ class Viewer3D(object):
             - cut1DFunctionCircle (function): Function to be called when performing an interactive circle (default None)
 
             - backgroundSubtraction (bool): Signify if a subtraction has been performed such that interactive cuts work (default False)
+            
+            - size_inches (tuple): Size of the figure in inches (default (11,7))
 
         For an example, see the `quick plotting tutorial <../Tutorials/Quick/QuickView3D.html>`_ under scripting tutorials.
 
@@ -182,7 +184,7 @@ class Viewer3D(object):
             ax.backgroundSubtraction = backgroundSubtraction
             ax.dQE = self.dQE
             ax.get_clim = self.get_clim
-        self.figure.set_size_inches(11,7)
+        self.figure.set_size_inches(size_inches[0],size_inches[1])
         self.value = 0
         self.figure.subplots_adjust(bottom=0.25)
         self.cmap = cmap # Update to accommodate deprecation warning
